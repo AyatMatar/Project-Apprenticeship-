@@ -1,0 +1,274 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+@using FinalProject.DTO
+@{
+    var report = (List<Report>)ViewBag.Report;
+    var reportadd = (Report)ViewBag.Reportadd;
+    int num = 0;
+    // var attshFile = (List<Attachfile>)ViewBag.attshFile;
+}
+
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Report On The Submission Task</h5>
+                <div class="filter-options me-5">
+                    <a data-backdrop="false" data-toggle="modal" data-target="@("#AddModal-" +reportadd.assignmentId)"
+                       data-url="@Url.Action($"AddReport/{reportadd.assignmentId}")" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New Report</a>
+                    <a href="/AdmanStudent/Assignment" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Report</a>
+                    
+                    @await Html.PartialAsync("_AddModelReport",reportadd)
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Report Title</th>
+                                <th>Report Description</th>
+                                <th>Report Notes</th>
+                                <th>Report Status</th>
+                                <th>Report file </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            @foreach (var Assi in report)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Assi.reportName</td>
+                                    <td> @Assi.reportDescription</td>
+                                    <td> @Assi.reportNotes</td>
+                                    <td>@Assi.reportStatus.statusName </td>
+                                    @if (Assi.attachfiles.Count == 0)
+                                    {
+                                        <td>No Report file </td>
+                                    }
+                                    else
+                                    { <td>
+                                        @foreach (var AttshfileId in Assi.attachfiles)
+                                        {
+                                              
+                                                <p>
+                                                    <a class="text-dark me-2" href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank"><i class="bi bi-download me-2 text-primary"></i>   @AttshfileId.Name</a>
+
+                                                </p>
+                                        }
+                                        </td>
+                                    }
+                                    @if (Assi.reportStatus.reportStatusId == 2 || Assi.reportStatus.reportStatusId == 3)
+                                    {
+                                        <td>
+                                            <div class="filter-options">
+                                                <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#ViewModal-" + Assi.reportId)" data-url="@Url.Action($"EditReport/{Assi.reportId}")"><img src="~/images/Icon-eye.svg"></a>
+
+                                              
+                                                <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#EditmyModal-" + Assi.reportId)" data-url="@Url.Action($"EditReport/{Assi.reportId}")" ><img src="~/images/icon-edit.svg"></a>
+                                                <a class="btn btn-gray w-34" href="/AdmanStudent/DeleteReport?reportId=@Assi.reportId&amp;assignmentId=@Assi.assignmentId"><img src="~/images/icon-delete.svg"></a>
+                                              
+                                            </div>
+                                            
+                                                
+                                        
+                                        </td>
+                                    }
+                                    else if (Assi.reportStatus.reportStatusId == 1)
+                                    {
+                                        <td>
+                                            <div class="filter-options" >
+                                                <div class="filter-options">
+                                                    <a disabled class="btn btn-gray text-danger"><img src="~/images/icon-delete.svg"></a>
+                                                    <a disabled class="btn btn-gray w-34 text-danger"><img src="~/images/icon-edit.svg"></a>
+                                                    <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#ViewModal-" + Assi.reportId)" data-url="@Url.Action($"EditReport/{Assi.reportId}")"><img src="~/images/Icon-eye.svg"></a>
+                                                   
+                                                </div>
+                                            </div>
+                                           
+                                        </td>
+
+                                    }
+                                   
+                                </tr>
+                                @await Html.PartialAsync("_EditModel",Assi)
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+
+                <!-- The Modal -->
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@* <div class="row">
+    <div class="col-12">
+        <div class="shadow-box">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="sub-head">Personal Details</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>National ID</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-12">
+                            <div class="form-group">
+                                <label>Please upload a personal photo</label>
+                                <div class="file-drop-area">
+                                    <p class="file-msg">
+                                        <img src="~/images/upload.svg" style="width:50px" class="fub-img">
+                                        Upload a File
+                                        <span>Drag &amp; Drop files here</span>
+                                    </p>
+                                    <input type="file" class="file-input" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-12">
+                            <div class="form-group">
+                                <label>Occupation</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+
+
+
+
+
+
+
+
+@* <section id="testimonials" class="testimonials section-bg">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2 style="color:#5777ba">Report</h2>
+        </div>
+        <a href="/AdmanStudent/AddReport/@assignmentId" class="buy-btn"><i class="bi bi-plus-square ml-1"></i> Add New Report</a>
+        <div class="testimonials-slider swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper" id="swiper-wrapper-eda1dfd6f09cdd3f" aria-live="off" style="transform: translate3d(-3340px, 0px, 0px); transition-duration: 0ms;">
+
+
+                @foreach (var Assi in (List<Report>)ViewBag.Report)
+           
+
+                {
+                    <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" role="group" aria-label="3 / 5" style="width: 628px; margin-right: 40px;">
+                        <div class="testimonial-item">
+                            <div class="icon">
+                                <i class="bi bi-journal-text"></i>
+                            </div>
+                            <h3>@Assi.reportName</h3>
+
+                            <ul>
+                                <li><i class="bi bi-check"></i> <span><b>Report Title</b> : @Assi.reportName</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Report Description</b> : @Assi.reportDescription</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Assi.reportNotes</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Assi.reportStatus.statusName</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Report file :</b></span></li>
+
+                                @if (Assi.attachfiles.Count == 0)
+                                {
+                                    <li><i class="bi bi-check"></i> <span><b> Null Report file </b></span></li>
+                                }
+                                else
+                                {
+                                    @foreach (var AttshfileId in Assi.attachfiles)
+                                    {
+                                        <li><i class="bi bi-check"></i> <span><a href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank">@AttshfileId.Name</a></span></li>
+                                    }
+                                }
+                            </ul>
+                            
+                                <div id="display" style="text-align: center;">
+                                    @if (Assi.reportStatus.reportStatusId == 1)
+                                    {
+                                    <div hidden class="text-center m-1" style="text-align:center; display: inline-block;"><a href="/AdmanStudent/DeleteReport/@Assi.reportId" class="buy-btn"><i class="bi bi-trash ml-1"></i>Delete</a></div>
+                                    <div hidden class="text-center m-1" style="text-align:center;display: inline-block;"><a href="/AdmanStudent/EditReport/@Assi.reportId" class="buy-btn"><i class="bi bi-pen ml-l"></i>Edit</a></div>
+                                    }
+                                    else
+                                    {
+                                    <div class="text-center m-1" style="text-align:center;display: inline-block;"><a href="/AdmanStudent/DeleteReport/@Assi.reportId" class="buy-btn"><i class="bi bi-trash ml-1"></i>Delete</a></div>
+                                    <div class="text-center m-1" style="text-align:center;display: inline-block;"><a href="/AdmanStudent/EditReport/@Assi.reportId" class="buy-btn"><i class="bi bi-pen ml-l"></i>Edit</a></div>
+                                    }
+
+
+                                </div>
+
+                           
+                        </div>
+                    </div>
+                }
+
+
+
+
+
+            </div>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            <div class="text-center m-1  " style="display:inline-block">
+                <a href="/AdmanStudent/Assignment" class="get-started-btn">
+                    <i class="bi bi-skip-backward-fill"></i><p class="ml-2" style="margin-left: 10px;display: inline-block;">back To Assignment</p>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+ *@
+
+
+
+

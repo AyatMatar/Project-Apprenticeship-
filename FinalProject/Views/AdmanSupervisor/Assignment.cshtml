@@ -1,0 +1,90 @@
+﻿@using FinalProject.DTO
+@using FinalProject.Models
+@{
+    var apprenticeshipId = (DTOAssignment)ViewBag.apprenticeshipId;
+}
+@{
+    int num = 0;
+}
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Assignment On The Submission Task</h5>
+                <div class="filter-options me-5">
+                    <a href="/AdmanSupervisor/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To training page</a>
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Assignment Title</th>
+                                <th>Assignment Start Date</th>
+                                <th>Assignment endDate</th>
+                                <th>Objectives</th>
+                                <th>Assignment file </th>
+                                <th>Assignment Student </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Assi in (List<DTOAssignment>)ViewBag.assignment)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Assi.assignmentTitle</td>
+                                    <td> @Assi.startDate</td>
+                                    <td> @Assi.endDate</td>
+
+                                    <td>
+                                        <select>
+                                            <option>--Objectives--</option>
+
+
+                                            @foreach (var obj in Assi.objectives)
+                                            {
+                                                <option>@obj.Name</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    @if (Assi.attachfiles.Count == 0)
+                                    {
+                                        <td>No Assignment file </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @foreach (var AttshfileId in Assi.attachfiles)
+                                            {
+                                                <p>
+                                                    <a class="text-dark me-2" href="/AdmanSupervisor/GetFile?attachmetId=@AttshfileId.Id" target="_blank"><i class="bi bi-download me-2 text-primary"></i>   @AttshfileId.Name</a>
+                                                </p>
+                                            }
+                                        </td>
+                                    }
+
+                                    <td>
+                                        <div class="filter-options">
+                                            <a class="btn btn-gray w-50" href="/AdmanSupervisor/Report?assignmentId=@Assi.assignmentId&amp;apprenticeshipId=@Assi.apprentiId" alt="Report">Report</a>
+                                        </div>
+                                    </td>
+
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

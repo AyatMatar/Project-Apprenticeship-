@@ -1,0 +1,234 @@
+﻿@using FinalProject.DTO
+@model DTOAssignment
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+
+@{
+    var objectives = (List<ApprenticeshipsObjectives>)ViewBag.objectives;
+    var attshFile = (List<Attachfile>)ViewBag.attshFile;
+
+
+}
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal" id="EditAssiModal-@Model.assignmentId" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Edit Assignment</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="features" class="features">
+                        <form asp-action="EditAssignment" enctype="multipart/form-data" method="post">
+                            <div class="container">
+
+                                <div class="row no-gutters">
+                                    <div class=" d-flex align-items-stretch order-2 order-lg-1">
+                                        <div class="content d-flex flex-column justify-content-center p-0">
+                                            <div class="row">
+                                 
+                                                <input type="hidden" asp-for="@Model.apprentiId" />
+                                                <input type="hidden" asp-for="@Model.assignmentId" />
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Title</h4>
+                                                    <input type="text" asp-for="@Model.assignmentTitle" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Description</h4>
+                                                    <input type="text" asp-for="@Model.assignmentDescription" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Notes</h4>
+                                                    <input type="text" asp-for="@Model.assignmentNotes" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">Form File</h4>
+                                                    @foreach (var Attsh in Model.attachfiles)
+                                                    {
+
+                                                        <div class="file-pop">
+                                                            <a name="attachfileId" href="/leader/GetFile?attachmetId=@Attsh.Id" target="_blank"><i class="bi bi-download me-2 text-primary icon-pop"></i>@Attsh.Name</a>
+                                                            <a href="/leader/DeletAttsh?attachmetId=@Attsh.Id&amp;assignmentId=@Model.apprentiId"> <i class="bi bi-x-square me-2 text-primary icon-pop"></i></a>
+                                                        </div>
+                                                    }
+
+                                                    <input class="mt-3" type="file" asp-for="formFiles" ariarequired-="true" multiple />
+                                                    
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">Objectives</h4>
+                                                    <br />
+                                                    <div>
+
+                                                        <select name="objectivesid" multiple>
+                                                            <option value="">--Select--</option>
+                                                            @foreach (var obj in objectives)
+                                                            {
+                                                                @if (Model.objectivesid.Contains(obj.objective.objectiveId))
+                                                                {
+
+                                                                    <option selected value="@obj.objective.objectiveId">@obj.objective.objectivecName</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@obj.objective.objectiveId">@obj.objective.objectivecName</option>
+                                                                }
+
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                              @*   <div class="col-md-6 col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Creation Start Date</label>
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Creation End Date</label>
+                                                        <input type="date" class="form-control">
+                                                    </div>
+                                                </div> *@
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal" id="ViewAssiModal-@Model.assignmentId" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Edit Assignment</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="features" class="features">
+                        <form asp-action="EditAssignment" enctype="multipart/form-data" method="post">
+                            <div class="container">
+
+                                <div class="row no-gutters">
+                                    <div class=" d-flex align-items-stretch order-2 order-lg-1">
+                                        <div class="content d-flex flex-column justify-content-center p-0">
+                                            <div class="row">
+
+                                                <input type="hidden" asp-for="@Model.apprentiId" />
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Title</h4>
+                                                    <input type="text" asp-for="@Model.assignmentTitle" aria-required="true" disabled />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Description</h4>
+                                                    <input type="text" asp-for="@Model.assignmentDescription" aria-required="true" disabled />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Notes</h4>
+                                                    <input type="text" asp-for="@Model.assignmentNotes" aria-required="true" disabled />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">Form File</h4>
+                                                    @if (Model.attachfiles.Count==  0)
+                                                    {
+                                                      <h5>No Report file</h5>
+                                                    }else{
+
+                                                    @foreach (var Attsh in Model.attachfiles)
+                                                    {
+                                                        
+                                                            <div class="file-pop">
+                                                                <a name="attachfileId" href="/AdmanStudent/GetFile?attachmetId=@Attsh.Id" target="_blank"><i class="bi bi-download me-2 text-primary icon-pop"></i>@Attsh.Name</a>
+                                                               
+                                                            </div>
+                                                        }
+                                                        
+                                                    }
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">Objectives</h4>
+                                                  
+                                                        <select class="m-3" name="objectivesid" multiple>
+                                                            <option value="">--Select--</option>
+                                                            @foreach (var obj in objectives)
+                                                            {
+                                                                @if (Model.objectivesid.Contains(obj.objective.objectiveId))
+                                                                {
+
+                                                                    <option disabled selected value="@obj.objective.objectiveId">@obj.objective.objectivecName</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option disabled value="@obj.objective.objectiveId">@obj.objective.objectivecName</option>
+                                                                }
+
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                               
+
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

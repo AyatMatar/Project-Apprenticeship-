@@ -1,0 +1,76 @@
+﻿@using FinalProject.Data.Entites;
+@{
+    var logs = (List<ReportLog>)ViewBag.report;
+    var assignmentId = ViewBag.assignmentId;
+    var apprenticeshipId=(int) ViewBag.apprenticeshipId;
+}
+<div class="container-fluid py-5">
+
+    <div class="row">
+        <div class="col-lg-12">
+          
+            <div class="horizontal-timeline">
+
+                <ul class="list-inline items">
+                     @foreach (var log in logs)
+                     {
+                        @if (log.ReportStatus.reportStatusId == 1)
+                        {
+                            <li class="list-inline-item items-list">
+                                <div class="px-4">
+                                    <div class="event-date badge bg-info" style="background: #70c34d    !important">@log.ReportStatus.statusName</div>
+                                    <h5 class="pt-2">@log.reportName</h5>
+                                    <p class="text-muted">
+
+                                        @log.reportDescription
+
+                                        @log.reportNotes
+                                    </p>
+                                </div>
+                            </li>
+                        }
+                        else if (log.ReportStatus.reportStatusId == 2)
+                        {
+                            <li class="list-inline-item items-list">
+                                <div class="px-4">
+                                    <div class="event-date badge bg-info" style="background: #58b8ed    !important">@log.ReportStatus.statusName</div>
+                                    <h5 class="pt-2">@log.reportName</h5>
+                                    <p class="text-muted">
+
+                                        @log.reportDescription
+
+                                        @log.reportNotes
+                                    </p>
+                                </div>
+                            </li>
+                        }else{
+                            <li class="list-inline-item items-list">
+                                <div class="px-4">
+                                    <div class="event-date badge bg-info " style="background: #e56565  !important">@log.ReportStatus.statusName</div>
+                                    <h5 class="pt-2">@log.reportName</h5>
+                                    <p class="text-muted">
+
+                                        @log.reportDescription
+
+                                        @log.reportNotes
+                                    </p>
+                                </div>
+                            </li>
+                        }
+
+                    }
+                       
+                </ul>
+
+            </div>
+            <a href="/AdmanSupervisor/Report?assignmentId=@assignmentId&amp;apprenticeshipId=@apprenticeshipId" type="button" class="btn btn-primary ms-5"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Report</a>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+

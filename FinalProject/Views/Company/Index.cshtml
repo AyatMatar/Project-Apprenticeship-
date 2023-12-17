@@ -1,0 +1,75 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+@{
+    var company = (Company)ViewBag.companyAdd;
+    var companes = (List<Company>)ViewBag.company;
+}
+
+<section id="pricing" class="pricing">
+
+
+
+    <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5> Pag ALL Company</h5>
+                <div class="filter-options me-5">
+                    <a data-backdrop="false" data-toggle="modal" data-target="@("#InsertModal")"
+                       data-url="@Url.Action($"Insert")" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New  Company</a>
+                    <a href="/Home/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+
+                @await Html.PartialAsync("_AddCompane",company)
+
+
+                </div>
+            </div>
+        </div>
+    <div class="container">
+    <div class="row">
+
+        @foreach (var com in companes)
+    {
+       
+
+                <div class="col-lg-4 col-4">
+                    <div class=" box aos-init aos-animate app-pop me-3" data-aos="fade-right">
+               
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bi bi-buildings-fill"></i>
+                        </div>
+                            <ul class="ui-appren">
+                            <li><i class="bi bi-check"></i> <span><b>Company Name</b> : @com.companyName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Company Address</b> : @com.companyAddress</span></li>
+                           
+
+
+                        </ul>
+                            <div id="filter-options">
+                                <div class="filter-options">
+
+                                <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#EditcompanyModal-" + com.companyId)" data-url="@Url.Action($"EditReport/{com.companyId}")"><img src="~/images/icon-edit.svg"></a>
+                                <a class="btn btn-gray w-34" href="/Company/Delete?companyId=@com.companyId"><img src="~/images/icon-delete.svg"></a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+
+
+
+        @await Html.PartialAsync("_EditcompanyModel",com)
+
+
+
+
+    }
+</div>
+</div>
+
+</section>
+
+

@@ -1,0 +1,80 @@
+﻿
+@using FinalProject.DTO
+@using FinalProject.Models
+
+<section id="pricing" class="pricing">
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h5>Apprenticeship</h5>
+            <div class="filter-options me-5">
+                <a href="/Apprenticeship/Add" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New Apprenticeship</a>
+                <a href="/Home/Index" type="button" class="btn btn-white ms-3"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+            </div>
+        </div>
+    </div>
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+  
+        <div class="row no-gutters">
+           
+            @foreach (var Appren in (List<training>)ViewBag.training)
+            {
+
+
+                <div class="col-lg-4">
+                    <div class=" box aos-init aos-animate me-3" data-aos="fade-right">
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-file-earmark-person"></i>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-check"></i> <span><b>Training Name</b> : @Appren.nameApprenticeship</span></li>
+                                @foreach (var obj in Appren.objectives)
+                                {
+                                    <li><i class="bi bi-check"></i> <span><b>Objective</b> :@obj.Name</span></li>
+
+                                }
+                                <li><i class="bi bi-check"></i> <span><b>Name Student</b> : @Appren.Student.Name</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Name Team Leader</b> : @Appren.TeamLeader.Name</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Name Supervisor</b> : @Appren.Supervisor.Name</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Start Date</b> : @Appren.startDate  </span></li>
+                                <li><i class="bi bi-check"></i> <span><b>End Date</b> : @Appren.endDate  </span></li>
+
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <a href="/Apprenticeship/Delete/@Appren.Id" class="get-started-btn">Delete</a>
+                                <a href="/Apprenticeship/Edit/@Appren.Id" class="get-started-btn">Edit</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+          
+
+               
+            }
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

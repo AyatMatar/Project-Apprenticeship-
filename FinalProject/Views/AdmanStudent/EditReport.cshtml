@@ -1,0 +1,171 @@
+﻿@* @using FinalProject.DTO
+@model DtoReport
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+@{
+    var attshFile = (List<Attachfile>)ViewBag.attshFile;
+}
+
+<section id="features" class="features">
+    <form action="/AdmanStudent/UpdateReport/@Model.reportId" enctype="multipart/form-data" method="post">
+        <div class="container">
+
+            <div class="section-title">
+                <h2> Create Report</h2>
+            </div>
+
+            <div class="row no-gutters">
+                <div class="col-xl-7 d-flex align-items-stretch order-2 order-lg-1">
+                    <div class="content d-flex flex-column justify-content-center">
+                        <div class="row">
+                            <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                <i class="bx bx-receipt"></i>
+                                <h4 class="title">Report Title</h4>
+                                <input type="text" asp-for="reportName" aria-required="true" />
+                            </div>
+                            <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                <i class="bx bx-receipt"></i>
+                                <h4 class="title">Report Description</h4>
+                                <input type="text" asp-for="reportDescription" aria-required="true" />
+                            </div>
+                            <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                <i class="bx bx-receipt"></i>
+                                <h4 class="title">Report Notes</h4>
+                                <input type="text" asp-for="reportNotes" aria-required="true" />
+                            </div>
+                            <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                <i class="bi bi-folder-plus"></i>
+                                <h4 class="title">Form File</h4>
+                                <h4 class="title">Form File</h4>
+                                @foreach (var att in attshFile)
+                                {
+                                    <br />
+                                    <span><a href="/leader/GetFile?attachmetId=@att.attachfileId" target="_blank">@att.Name</a></span>
+                                    <br />
+                                }
+                                <br />
+                                <input type="file" name="fromFile" ariarequired-="true" multiple />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <a href="/AdmanStudent/Report" class="get-started-btn">
+                <i class="bi bi-skip-backward-fill"></i><p class="ml-2" style="margin-left: 10px;display: inline-block;">back To Report</p>
+            </a>
+        </div>
+        <div class="text-center m-1 " style="text-align:center;display: inline-block;"><button type="submit" class="buy-btn boo">Save</button></div>
+    </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="services" class="services">
+    <form action="/AdmanStudent/UpdateReport/@Model.reportId ">
+        <!--  Section Title -->
+        <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+            
+
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-journal-richtext"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Title</h4>
+                            <input type="text" asp-for="reportName" aria-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Description</h4>
+                            <input type="text" asp-for="reportDescription" aria-required="true" />
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Notes</h4>
+                            <input type="text" asp-for="reportNotes" aria-required="true" />
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-folder-plus"></i></div>
+                        <div>
+                            <h4 class="title">Form File</h4>
+                            @foreach (var att in attshFile)
+                            {
+                                <br />
+                                <span><a href="/leader/GetFile?attachmetId=@att.attachfileId" target="_blank">@att.Name</a></span>
+                                <br />
+                            }
+                            <br />
+                            <input type="file" name="fromFile" ariarequired-="true" multiple />
+                        </div>
+                    </div>
+
+
+                    <!-- End Service Item -->
+                </div>
+            </div>
+
+            <div id="display" class="mt-5">
+                <div class="text-center"><button type="submit" class="buy-btn">Save</button></div>
+                <div class="text-center"><a href="/AdmanStudent/Assignment" class="buy-btn">Cancel</a></div>
+            </div>
+
+        </div>
+    </form>
+
+
+</section>
+ *@
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+<section id="pricing" class="pricing">
+
+    <!--  Section Title -->
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Apprenticeships-Objectives</h2>
+        <a href="/ApprenticObjectivec/Add" class="buy-btn"> Add New Apprenticeships-Objectives</a>
+    </div><!-- End Section Title -->
+
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row g-4">
+            @foreach (var App_obj in (List<ApprenticeshipsObjectives>)ViewBag.ApprenticObjective)
+            {
+
+                <div class="col-lg-4">
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bi bi-file-earmark-person"></i>
+                        </div>
+                        <h6><b>Training objectives</b></h6>
+
+                        <ul>
+                            
+                            <li><i class="bi bi-check"></i> <span><b>objectives</b> @App_obj.apprenticeshipId</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>objectives</b> @App_obj.objectiveId</span></li>
+
+                            <li><i class="bi bi-check"></i> <span><b>objectives</b> :</span></li>
+                            <li><i class="bi bi-check"></i> <span> @App_obj.objective.objectivecName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Training Detels</b> :</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Name Student</b> : @App_obj.apprenticeship.student.FirstName  @App_obj.apprenticeship.student.LastName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Name Teamleader</b> : @App_obj.apprenticeship.teamleader.FirstName  @App_obj.apprenticeship.teamleader.LastName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Name Supervisor</b> : @App_obj.apprenticeship.UniversitySupervisor.FirstName  @App_obj.apprenticeship.UniversitySupervisor.LastName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Start Date</b> : @App_obj.apprenticeship.startDate</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>End Date</b> : @App_obj.apprenticeship.endDate</span></li>
+
+
+                        </ul>
+                        <div id="display">
+                            <div class="text-center"><a href="/ApprenticObjectivec/Delete/@App_obj.objectiveId/@App_obj.apprenticeshipId" class="buy-btn">Delete</a></div>
+
+                            <div class="text-center"><a href="/ApprenticObjectivec/Edit?apprenticeshipId=@App_obj.apprenticeshipId&amp;objectiveId=@App_obj.objectiveId" class="buy-btn">Edit</a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- End Pricing Item -->
+            }
+
+        </div>
+
+    </div>
+</section>

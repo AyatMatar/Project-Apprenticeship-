@@ -1,0 +1,61 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+
+<section id="pricing" class="pricing">
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h5>Student Pag</h5>
+            <div class="filter-options me-5">
+                <a href="/Student/Add" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New Student</a>
+                <a href="/Home/Index" type="button" class="btn btn-white ms-3"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+            </div>
+        </div>
+    </div>
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row no-gutters">
+
+            @foreach (var stu in (List<Student>)ViewBag.Students)
+            {
+
+
+                <div class="col-lg-4">
+                    <div class=" box aos-init aos-animate me-3" data-aos="fade-right">
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-file-earmark-person"></i>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-check"></i> <span><b>NameStudent </b> : @stu.FirstName  @stu.LastName</span></li>
+                              
+                                <li><i class="bi bi-check"></i> <span><b>Age</b> : @stu.Age</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Major</b> : @stu.major</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Email</b> : @stu.Email</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Phone Number</b> : @stu.PhoneNumber</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>University Name</b> : @stu.University.universityName</span></li>
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <a href="/Student/Edit/@stu.Id" class="get-started-btn">Edit</a>
+                                <a href="/Student/Delete/@stu.Id" class="get-started-btn">Delete</a>
+                               
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            }
+
+        </div>
+
+    </div>
+</section>

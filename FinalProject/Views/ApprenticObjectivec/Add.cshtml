@@ -1,0 +1,78 @@
+﻿@using FinalProject.DTO
+@model AddApprenticObjectives
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+
+
+@{
+    var Apprenticeship = (List<Apprenticeship>)ViewBag.Apprenticeship;
+    var Objective = (List<Objective>)ViewBag.Objective;
+}
+
+<section id="services" class="services">
+    <form action="/ApprenticObjectivec/Insert">
+        <!--  Section Title -->
+        <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+            <h2>Create New Apprenticeships-Objectives</h2>
+
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-file-earmark-person"></i></div>
+                        <div>
+                            <h4 class="title">Objectives</h4>
+                            <select name="objectiveId">
+                                <option value="">--Select--</option>
+                                @foreach (var obj in Objective)
+                                {
+                                    <option value="@obj.objectiveId">@obj.objectivecName</option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-file-earmark-person"></i></div>
+                        <div>
+                            <h4 class="title">Apprenticeship</h4>
+                            <select name="apprenticeshipId">
+                                <option value="">--Select--</option>
+                                @foreach (var App in Apprenticeship)
+                                {
+                                    <option value="@App.apprenticeshipId">
+                                        @App.student.FirstName   @App.student.LastName 
+                                        @App.teamleader.FirstName   @App.teamleader.LastName 
+                                        @App.startDate  
+                                        @App.endDate 
+                                     </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+            </div>
+            <div id="display">
+                <div class="text-center mt-5"><button type="submit" class="buy-btn">Save</button></div>
+                <div class="text-center mt-5"><a href="/ApprenticObjectivec/Index" class="buy-btn">Cancel</a></div>
+            </div>
+
+
+
+
+
+        </div>
+    </form>
+
+
+</section>

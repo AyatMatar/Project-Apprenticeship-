@@ -1,0 +1,190 @@
+﻿@using FinalProject.DTO
+@model DTOAssignment
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+
+@{
+    // var objectiv = (List<ApprenticeshipsObjectives>)ViewBag.objectives;
+    
+}
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal" id="AddAssignmentModal-@Model.apprentiId" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Add Assignment</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="features" class="features">
+                        <form asp-action="AddAssignment" enctype="multipart/form-data" method="post">
+                            <div class="container">
+
+
+                                <div class="row no-gutters">
+                                    <div class=" d-flex align-items-stretch order-2 order-lg-1">
+                                        <div class="content d-flex flex-column justify-content-center p-0">
+                                            <div class="row">
+
+
+                                                <input type="hidden" asp-for="@Model.apprentiId" />
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <div>
+                                                    <h4 class="title">Assignment Title</h4>
+                                                    <input type="text" asp-for="@Model.assignmentTitle" aria-required="true" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment tart Date</h4>
+                                                    <input type="datetime-local" asp-for="@Model.startDate" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment EndDate</h4>
+                                                    <input type="datetime-local" asp-for="@Model.endDate" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Description</h4>
+                                                    <input type="text" asp-for="@Model.assignmentDescription" aria-required="true" />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                                    <i class="bx bx-receipt"></i>
+                                                    <h4 class="title">Assignment Notes</h4>
+                                                    <input type="text" asp-for="@Model.assignmentNotes" aria-required="true" />
+                                                </div>
+                                                 <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">Form File</h4>
+                                                    <input type="file" name="formFiles" ariarequired-="true" multiple />
+                                                </div>
+                                                <div class="col-md-6 icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                                    <i class="bi bi-folder-plus"></i>
+                                                    <h4 class="title">objectives</h4>
+                                                    <select name="objectivesid" multiple>
+                                                        <option value="">--Select--</option>
+                                                        @foreach (var obj in Model.objectives)
+                                                        {
+                                                            <option value="@obj.Id">@obj.Name</option>
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <section id="services" class="services">
+    <form action="/leader/InsertAssignment/@apprenticesId" enctype="multipart/form-data" method="post">
+        <!--  Section Title -->
+        <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+            <h2>Create New leader</h2>
+
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-journal-richtext"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Title</h4>
+                            <input type="text" asp-for="assignmentTitle" aria-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Description</h4>
+                            <input type="text" asp-for="assignmentDescription" aria-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="title">Assignment Notes</h4>
+                            <input type="text" asp-for="assignmentNotes" aria-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <!-- End Service Item -->
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-file-earmark-person"></i></div>
+                        <div>
+                            <h4 class="title">objectives</h4>
+                            <select name="objectivesid" multiple>
+                                <option value="">--Select--</option>
+                                @foreach (var obj in objectiv)
+                                {
+                                    <option value="@obj.objectiveId">@obj.objective.objectivecName</option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h4 class="title">Form File</h4>
+                            <input type="file" name="formFiles" aria-required="true" multiple />
+                        </div>
+                    </div>
+
+
+                    <!-- End Service Item -->
+                </div>
+            </div>
+
+            <div id="display">
+                <div class="text-center mt-5"><button type="submit" class="buy-btn">Save</button></div>
+                <div class="text-center mt-5"><a href="/leader/Assignment" class="buy-btn">Cancel</a></div>
+            </div>
+           
+
+
+
+
+        </div>
+    </form>
+
+
+</section> *@

@@ -1,0 +1,71 @@
+﻿@using FinalProject.Data.Entites;
+@using FinalProject.Models
+@{
+    int num = 0;
+    var apprenticeshipId = (int)ViewBag.apprenticeshipId;
+}
+
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Student Report page</h5>
+                <div class="filter-options me-5">
+                    <a href="/AdmanSupervisor/Assignment/@apprenticeshipId" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Assignment</a>
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Report Title</th>
+                                <th>Report Description</th>
+                                <th>Report Notes</th>
+                                <th>Report Status</th>
+                                <th>Report file </th>
+                                <th>Actaion </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Assi in (List<Report>)ViewBag.Report)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Assi.reportName</td>
+                                    <td> @Assi.reportDescription</td>
+                                    <td> @Assi.reportNotes</td>
+                                    <td>@Assi.reportStatus.statusName </td>
+                                    @if (Assi.attachfiles.Count == 0)
+                                    {
+                                        <td>Null Report file </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @foreach (var AttshfileId in Assi.attachfiles)
+                                            {
+
+                                                <p><a class="text-dark" href="/AdmanSupervisor/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank"></a></p>
+
+
+                                            }
+                                        </td>
+                                    }
+                                    <td><a href="/AdmanSupervisor/View?reportId=@Assi.reportId&amp;assignmentId=@Assi.assignmentId&amp;apprenticeshipId=@apprenticeshipId" class="btn btn-gray w-34 text-danger"><img src="~/images/Icon-eye.svg"></a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

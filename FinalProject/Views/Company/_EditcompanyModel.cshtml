@@ -1,0 +1,83 @@
+﻿@using FinalProject.Data.Entites
+@model Company
+@using FinalProject.Models
+
+
+    <!-- Modal -->
+    <div class="modal" id="EditcompanyModal-@Model.companyId" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Update  Company</h4>
+                    <button type="button" class="btn-close" aria-hidden="true" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="features" class="features">
+                        <form asp-action="Update" enctype="multipart/form-data" method="post">
+
+                            
+
+                                <div class="container">
+
+                                <input type="hidden" asp-for="@Model.companyId" />
+                                    <div class="row gy-4">
+                                        
+                                        <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                            <div class="service-item d-flex">
+                                                <div class="icon flex-shrink-0"><i class="bi bi-journal-richtext"></i></div>
+                                                <div>
+                                                    <h4 class="title">Company Name</h4>
+                                                    <input type="text" asp-for="companyName" aria-required="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Service Item -->
+
+                                        <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                            <div class="service-item d-flex">
+                                                <div class="icon flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+                                                <div>
+                                                    <h4 class="title">Company Address</h4>
+                                                    <input type="text" asp-for="companyAddress" aria-required="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Service Item -->
+
+                                    </div>
+
+
+
+
+
+                                </div>
+                          
+
+
+
+                            <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary" >Save</button>
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+
+@{
+  int   num =0;
+}
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Assignment On The Submission Task</h5>
+                <div class="filter-options me-5">
+                    <a href="/Home/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Assignment Title</th>
+                                <th>Assignment Description</th>
+                                <th>Assignment Notes</th>
+                                
+                                <th>Assignment file </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Assi in (List<Assignment>)ViewBag.assignment)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Assi.assignmentTitle</td>
+                                    <td> @Assi.assignmentDescription</td>
+                                    <td> @Assi.assignmentNotes</td>
+                                    @if (Assi.attachfiles.Count == 0)
+                                    {
+                                        <td>No Report file </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @foreach (var AttshfileId in Assi.attachfiles)
+                                            {
+                                                <p>
+                                                    <a class="text-dark me-5" href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank"><i class="bi bi-download me-2 text-primary"></i>@AttshfileId.Name </a>
+
+
+                                                </p>
+                                              
+                                            }
+                                        </td>
+                                    }
+                                    <td>
+                                        <div class="filter-options text-left"><a class="btn btn-gray " href="/AdmanStudent/Report/@Assi.assignmentId"><i class="bi bi-send"></i></a></div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- The Modal -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="testimonials" class="testimonials section-bg">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2 style="color:#5777ba">Assignment</h2>
+        </div>
+
+        <div class="testimonials-slider swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper" id="swiper-wrapper-eda1dfd6f09cdd3f" aria-live="off" style="transform: translate3d(-3340px, 0px, 0px); transition-duration: 0ms;">
+
+
+                  @foreach (var Assi in (List<Assignment>)ViewBag.assignment)
+                {
+                    <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2" role="group" aria-label="3 / 5" style="width: 628px; margin-right: 40px;">
+                        <div class="testimonial-item">
+                            <div class="icon">
+                                <i class="bi bi-journal-text"></i>
+                            </div>
+                            <h3>@Assi.assignmentTitle</h3>
+                            
+                                <ul>
+                                    <li><i class="bi bi-check"></i> <span><b>Name Teamleader </b> : @Assi.apprenticeship.teamleader.FirstName @Assi.apprenticeship.teamleader.LastName</span></li>
+                                    <li><i class="bi bi-check"></i> <span><b>Assignment Description</b> : @Assi.assignmentDescription</span></li>
+                                    <li><i class="bi bi-check"></i> <span><b>Assignment Notes</b> : @Assi.assignmentNotes</span></li>
+                                </ul>
+                            <div id="display">
+                                <div class="text-center m-1 " style="text-align:center;"><a href="/AdmanStudent/Report/@Assi.assignmentId"><i class="bi bi-send ml-1"></i>Submet</a></div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                
+
+
+            </div>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 4" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            <div class="text-center m-1  " style="display:inline-block">
+                <a href="/Home/Index" class="get-started-btn">
+                    <i class="bi bi-skip-backward-fill"></i><p class="ml-2" style="margin-left: 10px;display: inline-block;">back To Home</p>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section> *@
+
+
+
+

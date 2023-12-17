@@ -1,0 +1,106 @@
+﻿@using FinalProject.DTO
+@model Objective
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal" id="InsertobjectiveModal" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Create New objective</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="features" class="features">
+                        <form asp-action="Insert" enctype="multipart/form-data" method="post">
+
+                            <div class="container">
+
+                                <div class="row gy-4">
+                                    <input hidden asp-for="objectiveId" />
+                                    <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="service-item d-flex">
+                                            <div class="icon flex-shrink-0"><i class="bi bi-journal-richtext"></i></div>
+                                            <div>
+                                                <h4 class="title">objective Name</h4>
+                                                <input type="text" asp-for="objectivecName" aria-required="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Service Item -->
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+
+                            </div>
+
+
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="services" class="services">
+    <form action="/Objectivec/Insert">
+        <!--  Section Title -->
+        <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+            <h2>Create New Objectivec</h2>
+
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item d-flex">
+                        <div class="icon flex-shrink-0"><i class="bi bi-journal-richtext"></i></div>
+                        <div>
+                            <h4 class="title">Objectivec Name</h4>
+                            <input type="text" asp-for="objectivecName" aria-required="true" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="display">
+                <div class="text-center mt-5"><button type="submit" class="buy-btn">Save</button></div>
+                <div class="text-center mt-5"><a href="/Objectivec/Index" class="buy-btn">Cancel</a></div>
+            </div>
+
+
+
+
+
+        </div>
+    </form>
+
+
+</section> *@

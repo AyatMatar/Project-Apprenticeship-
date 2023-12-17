@@ -1,0 +1,138 @@
+﻿@using FinalProject.DTO
+@using FinalProject.Models
+@{
+    var apprenticeship = (DTOAssignment)ViewBag.apprenticeship;
+    var assignment=(List<DTOAssignment>)ViewBag.assignment;
+}
+
+@{
+    int num = 0;
+}
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Assignment On The Submission Task</h5>
+                <div class="filter-options me-5">
+                   
+                    <a data-backdrop="false" data-toggle="modal" data-target="@("#AddAssignmentModal-" + apprenticeship.apprentiId)"
+                       data-url="@Url.Action($"AddAssignment/{apprenticeship.apprentiId}")" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New Assignment</a>
+                    <a href="/leader/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To training page</a>
+
+                    @await Html.PartialAsync("_AddAssignment",apprenticeship)
+
+
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                
+                                <th>Assignment Title</th>
+                                <th>Assignment Start Date</th>
+                                <th>Assignment End Date</th>
+                                <th>Objectives</th>
+                                <th>Report File </th>
+                                <th>Report Student </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Assi in assignment)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    
+                                    <td>@Assi.assignmentTitle</td>
+                                    <td> @Assi.startDate</td>
+                                    <td> @Assi.endDate</td>
+                                    
+                                    <td>
+                                        <select>
+                                            <option>--Objectives--</option>
+                                            
+                                        
+                                        @foreach (var obj in Assi.objectives)
+                                        {
+                                            <option>@obj.Name</option>
+                                        }
+                                        </select>
+                                    </td>
+                                    @if (Assi.attachfiles.Count == 0)
+                                    {
+                                        <td>Null Report file </td>
+                                    }
+                                    else
+                                    {
+
+                                        <td>
+                                            <select>
+                                                <option>--Attach Files--</option>
+
+
+                                                @foreach (var attshfileId in Assi.attachfiles)
+                                                {
+                                                    <option>@attshfileId.Name</option>
+                                                }
+                                            </select>
+                                        </td>
+
+
+                                        @* <td>
+
+
+                                            @foreach (var AttshfileId in Assi.attachfiles)
+                                            {
+
+                                                <p>
+                                                    <a class="text-dark me-2" href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.Id" target="_blank"><i class="bi bi-download me-2 text-primary"></i>   @AttshfileId.Name</a>
+                                                   
+                                                </p>
+
+
+                                            }
+
+                                        </td> *@
+                                    }
+
+                                    <td>
+                                        <div class="filter-options">
+                                            <a class="btn btn-gray w-50" href="/leader/Report?assignmentId=@Assi.assignmentId&amp;apprentiId=@Assi.apprentiId" alt="Report">Report</a>
+                                        </div>
+                                    </td>
+
+                                        <td>
+                                        <div class="filter-options">
+                                            <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#ViewAssiModal-" + Assi.assignmentId)" data-url="@Url.Action($"EditAssignment/{Assi.assignmentId}")"><img src="~/images/Icon-eye.svg"></a>
+                                            <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#EditAssiModal-" + Assi.assignmentId)" data-url="@Url.Action($"EditAssignment/{Assi.assignmentId}")"><img src="~/images/icon-edit.svg"></a>
+                                            <a class="btn btn-gray w-34" href="/leader/DeleteAssignment?id=@Assi.assignmentId&amp;apprentiId=@Assi.apprentiId"><img src="~/images/icon-delete.svg"></a>
+                                            
+                                            @await Html.PartialAsync("_EditAssignment",Assi)
+                                            </div>
+                                        </td>
+                                    
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

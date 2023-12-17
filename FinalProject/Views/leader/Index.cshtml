@@ -1,0 +1,72 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+
+@{
+    int num = 0;
+}
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Manager training page</h5>
+                <div class="filter-options me-5">
+                    <a href="/Home/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Name Student</th>
+                                <th>Email</th>
+                                <th>Name University</th>
+                                <th>Start Date </th>
+                                <th>End Date </th>
+                                <th>Objectives</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Appren in (List<Apprenticeship>)ViewBag.training)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Appren.student.FirstName  @Appren.student.LastName</td>
+                                    <td>  @Appren.student.Email</td>
+                                    <td>@Appren.student.University.universityName</td>
+                                    <td>@Appren.startDate </td>
+                                    <td>@Appren.endDate</td>
+                                   
+                                        <td>
+                                           <select>
+                                                <option>--Objective--</option>
+                                                @foreach (var obj in Appren.apprenticeshipsObjectives)
+                                                {
+                                                <option>@obj.objective.objectivecName</option>
+                                                }
+                                            </select>
+                                        </td>
+                                    
+                                    <td>
+                                        <div class="filter-options text-left"><a class="btn btn-gray " href="/leader/Assignment/@Appren.apprenticeshipId"><i class="bi bi-send"></i><p>Assignment</p></a></div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>

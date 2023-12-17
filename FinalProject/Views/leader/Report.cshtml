@@ -1,0 +1,128 @@
+﻿
+@using FinalProject.Models
+ @using FinalProject.Data.Entites
+
+
+@{
+    int num = 0;
+    var apprentiId = (int)ViewBag.apprentiId;
+}
+<div class="row" style="margin-top: 90px;">
+    <div class="col-12" style="text-align: center;">
+        <div class="row  ms-5 me-5 mt-5">
+            <div class="col-12 ms-4 page-title flex">
+                <h5>Student Report page</h5>
+                <div class="filter-options me-5">
+                    <a href="/leader/Assignment/@apprentiId" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Assignment</a>
+                </div>
+            </div>
+        </div>
+        <div class="td-box">
+            <div class="td-table m-4">
+                <div class="table-responsive">
+                    <table id="example" class="table">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Report Name</th>
+                                <th>Report Status </th>
+                                <th>Report Description </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Assi in (List<Report>)ViewBag.Report)
+                            {
+                                num = num + 1;
+                                <tr>
+                                    <td>@num</td>
+                                    <td>@Assi.reportName</td>
+                                    <td>@Assi.reportStatus.statusName</td>
+                                    <td>@Assi.reportDescription</td>
+                                    <td>
+                                        <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#ViewReportModal-" + Assi.reportId)" data-url="@Url.Action($"View/{Assi.reportId}")"><img src="~/images/Icon-eye.svg"></a>
+                                        @await Html.PartialAsync("_ViewReport",Assi)
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="pricing" class="pricing">
+
+    <!--  Section Title -->
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Report</h2>
+        <div class="text-center mt-5"><a href="/leader/Assignment" class="buy-btn">Cancel</a></div>
+    </div><!-- End Section Title -->
+
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row g-4">
+            @foreach (var Assi in (List<Report>)ViewBag.Report)
+            {
+
+                <div class="col-lg-4">
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bi bi-buildings-fill"></i>
+                        </div>
+                        <ul>
+                            <li><i class="bi bi-check"></i> <span><b>Report Title</b> : @Assi.reportName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Assi.reportStatus.statusName</span></li>
+
+
+
+                        </ul>
+                        <div id="display">
+                            <div disabled class="text-center"><a href="/leader/View/@Assi.reportId" class="buy-btn">View</a></div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- End Pricing Item -->
+            }
+
+           
+        </div>
+
+    </div>
+</section> *@

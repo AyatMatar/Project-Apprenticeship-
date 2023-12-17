@@ -1,0 +1,60 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+
+<section id="pricing" class="pricing">
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h3>Pag All Supervisor </h3>
+            <div class="filter-options me-5">
+                <a href="/UniversitySupervisor/Add" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New UniversitySupervisor</a>
+                <a href="/UniversitySupervisor/Index" type="button" class="btn btn-white ms-3"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Student</a>
+            </div>
+        </div>
+    </div>
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row no-gutters">
+
+            @foreach (var Supervisor in (List<UniversitySupervisor>)ViewBag.Supervisor)
+            {
+
+
+                <div class="col-lg-4">
+                    <div class=" box aos-init aos-animate me-3" data-aos="fade-right">
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-file-earmark-person"></i>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-check"></i> <span>@Supervisor.FirstName  @Supervisor.LastName</span></li>
+                                <li><i class="bi bi-check"></i> <span>University Name:   @Supervisor.University.universityName</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Age</b> : @Supervisor.Age</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Major</b> : @Supervisor.field_work</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Email</b> : @Supervisor.Email</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Phone Number</b> : @Supervisor.PhoneNumber</span></li>
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <a href="/UniversitySupervisor/Edit/@Supervisor.Id" class="get-started-btn">Edit</a>
+                                <a href="/UniversitySupervisor/Delete/@Supervisor.Id" class="get-started-btn">Delete</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            }
+
+        </div>
+
+    </div>
+</section>
+

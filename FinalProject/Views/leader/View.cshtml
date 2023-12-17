@@ -1,0 +1,59 @@
+﻿@using FinalProject.Data.Entites;
+@using FinalProject.Models
+@model Report
+<section id="pricing" class="pricing">
+
+    <!--  Section Title -->
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Report</h2>
+        <div class="text-center mt-5"><a href="/leader/Assignment" class="buy-btn">Cancel</a></div>
+    </div><!-- End Section Title -->
+    
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row g-4">
+           
+                <div class="col-lg-4">
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bi bi-buildings-fill"></i>
+                        </div>
+                        <ul>
+                            <li><i class="bi bi-check"></i> <span><b>Report Title</b> : @Model.reportName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Description</b> : @Model.reportDescription</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Model.reportNotes</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Model.reportStatus.statusName</span></li>
+
+
+
+                        </ul>
+                        <div id="display">
+                            @if (Model.reportStatus.reportStatusId == 2)
+                            {
+
+                            <div class="text-center"><a href="/leader/reportStatus?reportId=@Model.assignmentId&amp;reportStatusId=1" class="buy-btn">Approved</a></div>
+                            <div class="text-center"><a href="/leader/reportStatus?reportId=@Model.assignmentId&amp;reportStatusId=3" class="buy-btn">Rejected</a></div>
+                            }
+                            else
+                            {
+                                <div disabled class="text-center"><a  class="buy-btn">Approved</a></div>
+                                <div disabled class="text-center"><a  class="buy-btn">Rejected</a></div>
+                            }
+
+                           
+                        </div>
+
+                    </div>
+
+                </div>
+           
+                <!-- End Pricing Item -->
+            
+
+        </div>
+
+    </div>
+   
+</section>

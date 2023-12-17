@@ -1,0 +1,123 @@
+﻿@using FinalProject.Data.Entites
+@model UniversitySupervisor
+@using FinalProject.Models
+@{
+    var Universities = (List<University>)ViewBag.Universities;
+}
+
+<form action="/UniversitySupervisor/Updet/@Model.Id">
+    <div class="row m-5 add-div">
+        <div class="col-12 m-5">
+            <div class="shadow-box m-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="sub-head">Personal Details</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <div>
+                                        <input class="form-control full-name-input" type="text" asp-for="FirstName" aria-required="true" placeholder="First Name">
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        <input class="form-control full-name-input" type="text" asp-for="SecondName" aria-required="true" placeholder="Second Name" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label></label>
+                                    <div>
+                                        <input class="form-control full-name-input mt-2" type="text" asp-for="thirdName" aria-required="true" placeholder="Third Name" />
+                                        <input class="form-control full-name-input mt-2" type="text" asp-for="LastName" aria-required="true" placeholder="Last Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>National Number</label>
+                                    <input class="form-control" type="text" asp-for="National_number" aria-required="true" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Jop</label>
+                                    <input asp-for="field_work" type="text" aria-required="true" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>University Name</label>
+                                    <select name="UniversityId" class="form-select">
+                                        <option value="">--Select--</option>
+
+                                        @foreach (var com in Universities)
+                                        {
+                                            @if (Model.UniversityId == com.universityId)
+                                            {
+                                                <option selected value="@com.universityId">@com.universityName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@com.universityId ">@com.universityName</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" asp-for="Email" aria-required="true" class="form-control">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-12">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" asp-for="PhoneNumber" aria-required="true" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-12">
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input type="text" asp-for="Age" aria-required="true" class="form-control">
+                                </div>
+                            </div>
+                          
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="display" class="mt-5">
+                        <div class="row">
+                            <div class="col-12 page-title-button flex">
+
+                                <div class="filter-options">
+                                    <button type="submit" class="btn btn-primary me-3">Save Update Supervisor Details</button>
+                                    <a href="/UniversitySupervisor/Index" type="button" class="btn btn-white me"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Pag Supervisor</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+

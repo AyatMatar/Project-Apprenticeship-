@@ -1,0 +1,153 @@
+﻿@using FinalProject.DTO
+@model UpdateApprenticeship
+@using FinalProject.Data.Entites;
+@using FinalProject.Models
+
+
+@{
+    var Objective = (List<Objective>)ViewBag.Objective;
+    var Students = (List<Student>)ViewBag.Students;
+    var Supervisors = (List<UniversitySupervisor>)ViewBag.Supervisors;
+    var Teamleaders = (List<Teamleader>)ViewBag.Teamleaders;
+}
+
+<form action="/Apprenticeship/Update/@Model.Id">
+    <div class="row m-5 add-div">
+        <div class="col-12 m-5">
+            <div class="shadow-box m-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="sub-head">Training Details</h5>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 ">
+                            <div class="form-group">
+                                <label>Name Training</label>
+                                <input class="form-control" type="text" asp-for="nameApprenticeship" aria-required="true" />
+                            </div>
+                        </div>
+                        <div class="col-md-6  col-lg-4">
+                            <div class="form-group">
+                                <label>Students</label>
+                                <select name="stuId" class="form-select">
+                                    <option value="">--Select--</option>
+                                    @foreach (var stu in Students)
+                                    {
+                                        @if (Model.stuId == stu.Id)
+                                        {
+
+                                            <option selected value="@stu.Id">@stu.FirstName   @stu.LastName </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@stu.Id">@stu.FirstName   @stu.LastName </option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6  col-lg-4">
+                            <div class="form-group">
+                                <label>Teamleaders</label>
+
+                                <select name="teamId" class="form-select">
+
+                                    <option value="">--Select--</option>
+                                    @foreach (var team in Teamleaders)
+                                    {
+                                        @if (Model.teamId == team.Id)
+                                        {
+                                            <option selected value="@team.Id">@team.FirstName   @team.LastName </option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@team.Id">@team.FirstName   @team.LastName </option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label>Creation Start Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label>Creation End Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6  col-lg-4">
+                            <div class="form-group">
+                                <label>Supervisor</label>
+                                <select name="SupervisorId" class="form-select">
+                                    <option value="">--Select--</option>
+                                    @foreach (var sup in Supervisors)
+                                    {
+                                        @if (Model.SupervisorId == sup.Id)
+                                        {
+                                            <option selected value="@sup.Id">@sup.FirstName   @sup.LastName </option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@sup.Id">@sup.FirstName   @sup.LastName </option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label>Objectives</label>
+                                <select name="objectives" class="form-select" multiple>
+                                    <option value="">--Select--</option>
+                                    @foreach (var jbo in Objective)
+                                    {
+                                        @if (Model.objectives.Contains(jbo.objectiveId))
+                                        {
+
+                                            <option selected value="@jbo.objectiveId">@jbo.objectivecName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@jbo.objectiveId">@jbo.objectivecName</option>
+                                        }
+
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="page-title-button flex">
+                        <div class="filter-options me-3">
+                            <button type="submit" class="btn btn-primary"> Save</button>
+                            <a href="/Apprenticeship/Index" class="btn btn-white ms-2"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Training</a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

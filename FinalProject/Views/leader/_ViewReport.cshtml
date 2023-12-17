@@ -1,0 +1,177 @@
+﻿@using FinalProject.Data.Entites
+
+@model Report
+
+
+
+
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal" id="ViewReportModal-@Model.reportId" aria-hidden="true" aria-labelledby="Edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Report</h4>
+                    <button type="button" class="btn-close" data-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <section id="pricing" class="pricing p-0">
+
+                        
+                        <div class=" aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+                            <div class="">
+
+
+
+
+                                <div class="col-8">
+                                    <div class=" box aos-init aos-animate me-3" data-aos="fade-right">
+
+                                        <div class="pricing-item ">
+
+                                            <div class="icon">
+                                                <i class="bi bi-file-earmark-person"></i>
+                                            </div>
+
+                                            <ul>
+
+                                                <li><i class="bi bi-check"></i> <span><b>Report Title</b> : @Model.reportName</span></li>
+                                                <li><i class="bi bi-check"></i> <span><b>Report Description</b> : @Model.reportDescription</span></li>
+                                                <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Model.reportNotes</span></li>
+                                                <li><i class="bi bi-check"></i> <span><b>Report Status</b> : @Model.reportStatus.statusName</span></li>
+                                                <li><i class="bi bi-check"></i> <span><b>Report File</b> </span></li>
+                                                <li>
+                                                    
+                                                        @foreach (var AttshfileId in Model.attachfiles)
+                                                        {
+                                                           <p>
+                                                            <a class="text-dark me-2" href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank"><i class="bi bi-download me-2 text-primary"></i>   @AttshfileId.Name</a>
+                                                           </p>
+
+                                                        }
+                                                   
+                                                </li>
+
+
+
+                                            </ul>
+                                            @if (Model.reportStatus.reportStatusId == 2)
+                                            {
+                                                <div id="filter-options">
+                                                    <a type="button" href="/leader/reportStatus?reportId=@Model.reportId&amp;reportStatusId=1&amp;assignmentId=@Model.assignmentId" class="get-started-btn"><i class="bi bi-check me-2"></i>Approved</a>
+                                                    <a type="button" href="/leader/reportStatus?reportId=@Model.reportId&amp;reportStatusId=3" class="get-started-btn"><i class="bi bi-x"></i>Rejected</a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="filter-options me-5">
+                                                    <a disabled class="get-started-btn"><i class="bi bi-check me-2"></i>Approved</a>
+                                                    <a disabled class="get-started-btn"><i class="bi bi-x"></i>Rejected</a>
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="features" class="features">
+    <form asp-action="View" enctype="multipart/form-data" method="post">
+        <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+            <div class="row g-4">
+
+                <div>
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bx bx-receipt"></i>
+                        </div>
+                        <input hidden asp-for="@Model.reportId" />
+                        <ul>
+
+                            <li><i class="bi bi-check"></i> <span><b>Report Title</b> : @Model.reportName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Description</b> : @Model.reportDescription</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Model.reportNotes</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> : @Model.reportStatus.statusName</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Report Notes</b> </span></li>
+                            <li>
+                                <span>
+                                    @foreach (var AttshfileId in Model.attachfiles)
+                                    {
+                                        <a class="text-dark me-2" href="/AdmanStudent/GetFile?attachmetId=@AttshfileId.attachfileId" target="_blank"><i class="bi bi-download me-2 text-primary"></i>   @AttshfileId.Name</a>
+
+                                    }
+                                </span>
+                            </li>
+
+
+
+                        </ul>
+                        <div id="display">
+                            @if (Model.reportStatus.reportStatusId == 2)
+                            {
+                                <div class="filter-options me-5">
+                                    <a type="button" href="/leader/reportStatus?reportId=@Model.reportId&amp;reportStatusId=1&amp;assignmentId=@Model.assignmentId" class="buy-btn-primary"><i class="bi bi-check me-2"></i>Approved</a>
+                                    <a type="button" href="/leader/reportStatus?reportId=@Model.reportId&amp;reportStatusId=3" class="buy-btn-primary"><i class="bi bi-x"></i>Rejected</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="filter-options me-5">
+                                    <a disabled class="buy-btn-primary"><i class="bi bi-check me-2"></i>Approved</a>
+                                    <a disabled class="buy-btn-primary"><i class="bi bi-x"></i>Rejected</a>
+                                </div>
+                            }
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- End Pricing Item -->
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+
+        </div>
+    </form>
+</section> *@

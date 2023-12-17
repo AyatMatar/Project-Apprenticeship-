@@ -1,0 +1,138 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+
+<section id="pricing" class="pricing">
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h3>Pag All TeamLeader </h3>
+            <div class="filter-options me-5">
+                <a href="/TeamLeader/Add" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New TeamLeader</a>
+                <a href="/TeamLeader/Index" type="button" class="btn btn-white ms-3"> <i class="bi bi-skip-backward-fill me-2"></i>Back To TeamLeader</a>
+            </div>
+        </div>
+    </div>
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row no-gutters">
+
+            @foreach (var TeamLeader in (List<Teamleader>)ViewBag.TeamLeaders)
+            {
+
+
+                <div class="col-lg-4">
+                    <div class=" box aos-init aos-animate me-3" data-aos="fade-right">
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-file-earmark-person"></i>
+                            </div>
+
+                            <ul>
+                                <li><i class="bi bi-check"></i> <span><b>Name TeamLeader</b> : @TeamLeader.FirstName  @TeamLeader.LastName</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Name Company</b> : @TeamLeader.company.companyName</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Age</b> : @TeamLeader.Age</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Department</b> : @TeamLeader.department</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Email</b> : @TeamLeader.Email</span></li>
+                                <li><i class="bi bi-check"></i> <span><b>Phone Number</b> : @TeamLeader.PhoneNumber</span></li>
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <a href="/TeamLeader/Edit/@TeamLeader.Id" class="get-started-btn">Edit</a>
+                                <a href="/TeamLeader/Delete/@TeamLeader.Id" class="get-started-btn">Delete</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            }
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <section id="pricing" class="pricing">
+
+    <!--  Section Title -->
+    <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Team Leader</h2>
+        <a href="/TeamLeader/Add" class="buy-btn"> Add New Team Leader</a>
+    </div><!-- End Section Title -->
+
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row g-4">
+            @foreach (var TeamLeader in (List<Teamleader>)ViewBag.TeamLeaders)
+            {
+
+                <div class="col-lg-4">
+
+                    <div class="pricing-item ">
+
+                        <div class="icon">
+                            <i class="bi bi-file-earmark-person"></i>
+                        </div>
+                        <h6>@TeamLeader.FirstName  @TeamLeader.LastName</h6>
+
+                        <ul>
+                            <li><i class="bi bi-check"></i> <span><b>Age</b> : @TeamLeader.Age</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Department</b> : @TeamLeader.department</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Email</b> : @TeamLeader.Email</span></li>
+                            <li><i class="bi bi-check"></i> <span><b>Phone Number</b> : @TeamLeader.PhoneNumber</span></li>
+
+
+                        </ul>
+                        <div id="display">
+                            <div class="text-center mb-4"><a href="/TeamLeader/Delete/@TeamLeader.Id" class="buy-btn">Delete</a></div>
+                            <div class="text-center"><a href="/TeamLeader/Edit/@TeamLeader.Id" class="buy-btn">Edit</a></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- End Pricing Item -->
+            }
+
+        </div>
+
+    </div>
+</section> *@

@@ -1,0 +1,129 @@
+﻿@using FinalProject.Data.Entites
+@using FinalProject.Models
+@{
+    var objective = (Objective)ViewBag.objective;
+    var Objectives = (List<Objective>)ViewBag.Objectives;
+}
+
+<section id="pricing" class="pricing">
+
+
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h5> Pag ALL Objectives</h5>
+            <div class="filter-options me-5">
+                <a data-backdrop="false" data-toggle="modal" data-target="@("#InsertobjectiveModal")"
+                   data-url="@Url.Action($"Insert")" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New  Objectives</a>
+                <a href="/Home/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+
+                @await Html.PartialAsync("_AddObjectiveModel",objective)
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            @foreach (var com in Objectives)
+            {
+
+
+                <div class="col-lg-4 col-4">
+                    <div class=" box aos-init aos-animate app-pop me-3" data-aos="fade-right">
+
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-buildings-fill"></i>
+                            </div>
+                            <ul class="ui-appren">
+                                <li><i class="bi bi-check"></i> <span><b>Objectives Name</b> : @com.objectivecName</span></li>
+
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <div class="filter-options">
+
+                                    <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#EditObjectiveModal-" + com.objectiveId)" data-url="@Url.Action($"Edit/{com.objectiveId}")"><img src="~/images/icon-edit.svg"></a>
+                                    <a class="btn btn-gray w-34" href="Objectivec/Delete?objectiveId=@com.objectiveId"><img src="~/images/icon-delete.svg"></a>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @await Html.PartialAsync("_EditObjectiveModel",com)
+
+
+
+
+            }
+        </div>
+    </div>
+
+</section>
+
+
+
+@* <section id="pricing" class="pricing">
+
+
+    <div class="row  ms-5 me-5 mt-5">
+        <div class="col-12 ms-4 page-title flex">
+            <h5> Pag ALL Objectives</h5>
+            <div class="filter-options me-5">
+                <a data-backdrop="false" data-toggle="modal" data-target="@("#InsertobjectiveModal")"
+                   data-url="@Url.Action($"Insert")" class="btn btn-primary"><i class="bi bi-plus-square me-2"></i>Add New  Objective</a>
+                <a href="/Home/Index" type="button" class="btn btn-white"> <i class="bi bi-skip-backward-fill me-2"></i>Back To Home</a>
+
+                @await Html.PartialAsync("_AddObjectiveModel",objective)
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="row no-gutters--responsive">
+            @foreach (var com in Objectives)
+            {
+                <div class="col-lg-4">
+                    <div class=" box aos-init aos-animate app-pop me-3" data-aos="fade-right">
+
+
+                        <div class="pricing-item ">
+
+                            <div class="icon">
+                                <i class="bi bi-buildings-fill"></i>
+                            </div>
+                            <ul class="ui-appren">
+                                <li><i class="bi bi-check"></i> <span><b>Objective Name</b> : @com.objectivecName</span></li>
+
+
+
+                            </ul>
+                            <div id="filter-options">
+                                <a class="btn btn-gray w-34" data-backdrop="false" data-toggle="modal" data-target="@("#EditObjectiveModal-" + com.objectiveId)" data-url="@Url.Action($"Edit/{com.objectiveId}")"><img src="~/images/icon-edit.svg"></a>
+                                <a class="btn btn-gray w-34" href="/Objectivec/Delete?objectiveId=@com.objectiveId"><img src="~/images/icon-delete.svg"></a>
+                            </div>
+
+                        </div>
+                        @await Html.PartialAsync("_EditObjectiveModel",com)
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+</section> *@
